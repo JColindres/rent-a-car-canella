@@ -7,5 +7,6 @@
         public string Marca { get; set; } = null!;
         public string Color { get; set; } = null!;
         public decimal Alquiler { get; set; }
+        public int GarajeIdGaraje { get; set; }
     }
 }

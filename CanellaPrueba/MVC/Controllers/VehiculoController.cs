@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using MVC.Models;
 using Newtonsoft.Json;
 using System.Text;
@@ -32,6 +33,27 @@ namespace MVC.Controllers
             return View(modelList);
         }
 
+        /*public ActionResult Create()
+        {
+            List<GarajeViewModel> modelList = new List<GarajeViewModel>();
+            HttpResponseMessage responseMessage = client.GetAsync(client.BaseAddress + "/Garajes").Result;
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                string data = responseMessage.Content.ReadAsStringAsync().Result;
+                if (data != null)
+                {
+                    modelList = JsonConvert.DeserializeObject<List<GarajeViewModel>>(data);
+                    List<SelectListItem> items = new List<SelectListItem>();
+                    foreach(var item in modelList)
+                    {
+                        items.Add(new SelectListItem { Text = item.Nombre, Value = item.IdGaraje.ToString() });
+                    }
+                    ViewBag.garaje = items;
+                }
+            }
+            return View();
+        }*/
+
         public ActionResult Create()
         {
             return View();
@@ -52,11 +74,11 @@ namespace MVC.Controllers
 
         public ActionResult Edit(int id)
         {
-            VehiculoViewModel student = null;
+            VehiculoViewModel vehiculo = null;
 
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("https://localhost:7156/api/");
+                client.BaseAddress = new Uri("https://localhost:7256/api/");
                 //HTTP GET
                 var responseTask = client.GetAsync("Vehiculoes/" + id.ToString());
                 responseTask.Wait();
@@ -67,10 +89,10 @@ namespace MVC.Controllers
                     var readTask = result.Content.ReadAsAsync<VehiculoViewModel>();
                     readTask.Wait();
 
-                    student = readTask.Result;
+                    vehiculo = readTask.Result;
                 }
             }
-            return View(student);
+            return View(vehiculo);
         }
 
         [HttpPost]
@@ -90,7 +112,7 @@ namespace MVC.Controllers
         {
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("https://localhost:7156/api/");
+                client.BaseAddress = new Uri("https://localhost:7256/api/");
 
                 //HTTP DELETE
                 var deleteTask = client.DeleteAsync("Vehiculoes/" + id.ToString());

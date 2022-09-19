@@ -100,10 +100,6 @@ namespace RESTservice.Models
                     .HasForeignKey(d => d.UsuarioIdUsuario)
                     .HasConstraintName("FK__RESERVA__USUARIO__4316F928");
 
-                entity.HasOne(d => d.VehiculoIdVehiculoNavigation)
-                    .WithMany(p => p.Reservas)
-                    .HasForeignKey(d => d.VehiculoIdVehiculo)
-                    .HasConstraintName("FK__RESERVA__VEHICUL__440B1D61");
             });
 
             modelBuilder.Entity<TipoUsuario>(entity =>
@@ -176,7 +172,9 @@ namespace RESTservice.Models
                     .IsUnicode(false)
                     .HasColumnName("COLOR");
 
-                entity.Property(e => e.GarajeIdGaraje).HasColumnName("GARAJE_ID_GARAJE");
+                entity.Property(e => e.GarajeIdGaraje)
+                .HasColumnType("int")
+                .HasColumnName("GARAJE_ID_GARAJE");
 
                 entity.Property(e => e.Marca)
                     .HasMaxLength(20)
@@ -188,10 +186,6 @@ namespace RESTservice.Models
                     .IsUnicode(false)
                     .HasColumnName("MATRICULA");
 
-                entity.HasOne(d => d.GarajeIdGarajeNavigation)
-                    .WithMany(p => p.Vehiculos)
-                    .HasForeignKey(d => d.GarajeIdGaraje)
-                    .HasConstraintName("FK__VEHICULO__GARAJE__3B75D760");
             });
 
             OnModelCreatingPartial(modelBuilder);

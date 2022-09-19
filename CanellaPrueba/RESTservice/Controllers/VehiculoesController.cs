@@ -72,6 +72,7 @@ namespace RESTservice.Controllers
                     vehiculo.Matricula = model.Matricula;
                     vehiculo.Marca = model.Marca;
                     vehiculo.Color = model.Color;
+                    vehiculo.Alquiler = model.Alquiler;
                     vehiculo.GarajeIdGaraje = model.GarajeIdGaraje;
 
                     db.Add(vehiculo);
@@ -102,6 +103,7 @@ namespace RESTservice.Controllers
                     vehiculo.Matricula = model.Matricula;
                     vehiculo.Marca = model.Marca;
                     vehiculo.Color = model.Color;
+                    vehiculo.Alquiler = model.Alquiler;
                     vehiculo.GarajeIdGaraje = model.GarajeIdGaraje;
 
                     db.Entry(vehiculo).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
