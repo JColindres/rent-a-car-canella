@@ -46,11 +46,11 @@ namespace RESTservice.Controllers
             {
                 using (RENT_A_CAR_CANELLAContext db = new RENT_A_CAR_CANELLAContext())
                 {
-                    var lista = db.Vehiculos.Find(id);
+                    var vehiculo = db.Vehiculos.Find(id);
                     oRespuesta.Exito = 1;
-                    oRespuesta.Data = lista;
+                    oRespuesta.Data = vehiculo;
                     oRespuesta.Mensaje = "Registros encontrado";
-                }
+                }                
             }
             catch (Exception ex)
             {
@@ -72,7 +72,7 @@ namespace RESTservice.Controllers
                     vehiculo.Matricula = model.Matricula;
                     vehiculo.Marca = model.Marca;
                     vehiculo.Color = model.Color;
-                    vehiculo.IdVehiculo = model.IdVehiculo;
+                    vehiculo.GarajeIdGaraje = model.GarajeIdGaraje;
 
                     db.Add(vehiculo);
                     db.SaveChanges();
@@ -102,7 +102,7 @@ namespace RESTservice.Controllers
                     vehiculo.Matricula = model.Matricula;
                     vehiculo.Marca = model.Marca;
                     vehiculo.Color = model.Color;
-                    vehiculo.IdVehiculo = model.IdVehiculo;
+                    vehiculo.GarajeIdGaraje = model.GarajeIdGaraje;
 
                     db.Entry(vehiculo).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                     db.SaveChanges();
